@@ -44,7 +44,7 @@ public class Blob {
 	        catch (NoSuchAlgorithmException e) {
 	            throw new RuntimeException(e);
 	        }
-		 System.out.println ("Creating new blob" + Sha1.substring(0,10) + "from content:" + contents);
+		 System.out.println ("Creating new blob " + Sha1.substring(0,10) + " from content:" + contents);
 		
 	            File objects = new File ("objects");
 	            File f2=new File ("objects/"+Sha1+".txt");
