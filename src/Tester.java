@@ -8,6 +8,8 @@ public class Tester {
 		git.add("foo.txt");
 		git.add("bar.txt");
 		git.add("foobar.txt");
+		git.remove("foobar.txt");
+		git.add ("something.txt");
 //		Blob something = new Blob ("something.txt");
 //		System.out.println(something.getSha1());
 	}
