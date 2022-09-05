@@ -84,6 +84,7 @@ public class Index {
         f1.delete();
         File f3=new File ("index.txt");
         f2.renameTo(f3);
+        System.out.println ("Deleted the file: "+ Sha1);
 	}
 
 }
