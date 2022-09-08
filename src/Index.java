@@ -4,11 +4,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.Map.Entry;
 import java.util.Scanner;
 
 public class Index {
-	private BufferedWriter bw1;
-	private BufferedWriter bw2;
+	
 	private HashMap <String, String> blobs;
 	
 	public Index () {
@@ -26,64 +26,83 @@ public class Index {
 	public void add (String filename) throws IOException {
 		Blob create = new Blob (filename);
 		blobs.put (filename, create.getSha1());
-		try(FileWriter fw = new FileWriter("index.txt", true);
-			    BufferedWriter bw = new BufferedWriter(fw);
-			    PrintWriter out = new PrintWriter(bw))
-			{
-			    out.println(filename + " : " + create.getSha1());
-			    
-			} catch (IOException e) {
-			    //exception handling left as an exercise for the reader
-			}
+        File file = new File("index.txt");
+		 BufferedWriter bf = null;
+		  
+	        try {
+	  
+	            // create new BufferedWriter for the output file
+	            bf = new BufferedWriter(new FileWriter(file));
+	  
+	            // iterate map entries
+	            for (Entry<String, String> entry :
+	                 blobs.entrySet()) {
+	  
+	                // put key and value separated by a colon
+	                bf.write(entry.getKey() + " : "
+	                         + entry.getValue());
+	  
+	                // new line
+	                bf.newLine();
+	            }
+	  
+	            bf.flush();
+	        }
+	            catch (IOException e) {
+	                e.printStackTrace();
+	            }
+	            finally {
+	      
+	                try {
+	      
+	                    // always close the writer
+	                    bf.close();
+	                }
+	                catch (Exception e) {
+	                }
+	                
+	            }
 	}
 	public void remove (String filename) throws IOException {
 		String Sha1 = blobs.remove(filename);
 		File myObj = new File ("objects/"+Sha1+".txt");
 		myObj.delete();
-		File f2=new File ("indexnew.txt");
-        f2.createNewFile();
-        Scanner scanner1=new Scanner (new File ("index.txt"));
-        if (scanner1.hasNextLine()) {
-        	try(FileWriter fw = new FileWriter("indexnew.txt", true);
-    			    BufferedWriter bw1 = new BufferedWriter(fw);
-    			    PrintWriter out = new PrintWriter(bw1))
-    			{
-        		String line = scanner1.nextLine();
-    			int index = line.indexOf(':');
-    			if (line.substring(0,index).equals(filename + " ")) {
-    				
-    			} else {
-    				out.println (line);
-    			}
-//    			    
-    			} catch (IOException e) {
-    			}
-			
-			
-			
-		}
-		while (scanner1.hasNextLine()) {
-			try(FileWriter fw = new FileWriter("indexnew.txt", true);
-    			    BufferedWriter bw2 = new BufferedWriter(fw);
-    			    PrintWriter out = new PrintWriter(bw2))
-    			{
-        		String line = scanner1.nextLine();
-    			int index = line.indexOf(':');
-    			if (line.substring(0,index).equals(filename + " ")) {
-    				
-    			} else {
-    				out.println (line);
-    			}
-//    			    
-    			} catch (IOException e) {
-    			}
-		}
-		
-		scanner1.close();
-		File f1=new File ("index.txt");
-        f1.delete();
-        File f3=new File ("index.txt");
-        f2.renameTo(f3);
+		File file = new File("index.txt");
+		 BufferedWriter bf = null;
+		  
+	        try {
+	  
+	            // create new BufferedWriter for the output file
+	            bf = new BufferedWriter(new FileWriter(file));
+	  
+	            // iterate map entries
+	            for (Entry<String, String> entry :
+	                 blobs.entrySet()) {
+	  
+	                // put key and value separated by a colon
+	                bf.write(entry.getKey() + " : "
+	                         + entry.getValue());
+	  
+	                // new line
+	                bf.newLine();
+	            }
+	  
+	            bf.flush();
+	        }
+	            catch (IOException e) {
+	                e.printStackTrace();
+	            }
+	            finally {
+	      
+	                try {
+	      
+	                    // always close the writer
+	                    bf.close();
+	                }
+	                catch (Exception e) {
+	                }
+	                
+	            }
         System.out.println ("Deleted the file: "+ Sha1);
 	}
 
