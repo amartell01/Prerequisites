@@ -25,11 +25,17 @@ class AshersTester {
 
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
+<<<<<<< Updated upstream
+=======
+		File file = new File ("/Prerequisites/test.txt");
+		file.delete();
+>>>>>>> Stashed changes
 	}
 
 	@Test
 	void test() {
-		fail("Not yet implemented");
+		System.out.println("testing");
+//		fail("Not yet implemented");
 	}
 
 }
