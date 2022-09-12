@@ -29,18 +29,18 @@ class AshersTester {
 	}
 
 	@Test
-	void testBlob() throws IOException {
-		Blob b = new Blob ("test.txt");
-		String str = b.getSha1();
-		File file = new File("objects/"+str+".txt");
-		assertTrue(file.exists());
+//	void testBlob() throws IOException {
+//		Blob b = new Blob ("test.txt");
+//		String str = b.getSha1();
+//		File file = new File("objects/"+str+".txt");
+//		assertTrue(file.exists());
+//	}
+	
+	void testInit() throws IOException {
+		Index i = new Index();
+		i.init();
 	}
 	
-//	void testInit() throws IOException {
-//		Index i = new Index();
-//		i.init();
-//	}
-//	
 //	void testAdd() throws IOException {
 //		Index i = new Index();
 //		i.add("foo.txt");
