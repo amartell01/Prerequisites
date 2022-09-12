@@ -28,13 +28,23 @@ class AshersTester {
 	}
 
 	@Test
-	void test() throws IOException {
+	void testBlob() throws IOException {
+		
+		
+		//Blob b = new Blob ("test.txt");
+		fail("Not yet implemented");
+	}
+	
+	void testInit() throws IOException {
+		Index i = new Index();
+		i.init();
+	}
+	
+	void testAdd() throws IOException {
 		Index i = new Index();
 		i.add("foo.txt");
 		i.add("test.txt");
 		i.add("something.txt");
-		//Blob b = new Blob ("test.txt");
-		fail("Not yet implemented");
 	}
 
 }
