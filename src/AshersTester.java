@@ -29,7 +29,11 @@ class AshersTester {
 
 	@Test
 	void test() throws IOException {
-		Blob b = new Blob ("test.txt");
+		Index i = new Index();
+		i.add("foo.txt");
+		i.add("test.txt");
+		i.add("something.txt");
+		//Blob b = new Blob ("test.txt");
 		fail("Not yet implemented");
 	}
 
