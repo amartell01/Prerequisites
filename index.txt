@@ -1,0 +1,3 @@
+foo.txt : 60eaad68490578f099fc5f29fbab9029561198e5
+test.txt : c3499c2729730a7f807efb8676a92dcb6f8a3f8f
+something.txt : 94e66df8cd09d410c62d9e0dc59d3a884e458e05

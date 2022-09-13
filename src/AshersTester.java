@@ -35,17 +35,19 @@ class AshersTester {
 //		File file = new File("objects/"+str+".txt");
 //		assertTrue(file.exists());
 //	}
-	
-	void testInit() throws IOException {
-		Index i = new Index();
-		i.init();
-	}
-	
-//	void testAdd() throws IOException {
+//
+//	
+//	
+//	void testInit() throws IOException {	
 //		Index i = new Index();
-//		i.add("foo.txt");
-//		i.add("test.txt");
-//		i.add("something.txt");
+//		i.init();
 //	}
+	
+	void testAdd() throws IOException {
+		Index i = new Index();
+		i.add("foo.txt");
+		i.add("test.txt");
+		i.add("something.txt");
+	}
 
 }
