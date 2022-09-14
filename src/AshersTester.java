@@ -6,6 +6,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.HashMap;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -25,32 +26,41 @@ class AshersTester {
 	}
 
 	@AfterAll
-	static void tearDownAfterClass() throws Exception {
-		File f = new File ("test.txt");
-		f.delete();
-	}
-
+//	static void tearDownAfterClass() throws Exception {
+//		File f = new File ("test.txt");
+//		f.delete();
+//	}
+//
+//	@Test
+//	void testBlob() throws IOException {
+//		Blob b = new Blob ("test.txt");
+//		String str = b.getSha1();
+//		File file = new File("objects/"+str+".txt");
+//		assertTrue(file.exists());
+//	}
+//
+//	@Test
+//	void testInit() throws IOException {	
+//		Index i = new Index();
+//		i.init();
+//	}
+//	@Test
+//	void testAddnRemove() throws IOException {
+//		Index i = new Index();
+//		i.add("foo.txt");
+//		i.add("test.txt");
+//		i.add("something.txt");
+//		i.remove("foo.txt");
+//		i.remove("something.txt");
+//	}
+	
 	@Test
-	void testBlob() throws IOException {
+	void testTree() throws IOException {
+		HashMap <String, String> hm = new HashMap <String, String>();
 		Blob b = new Blob ("test.txt");
-		String str = b.getSha1();
-		File file = new File("objects/"+str+".txt");
-		assertTrue(file.exists());
-	}
-
-	@Test
-	void testInit() throws IOException {	
-		Index i = new Index();
-		i.init();
-	}
-	@Test
-	void testAddnRemove() throws IOException {
-		Index i = new Index();
-		i.add("foo.txt");
-		i.add("test.txt");
-		i.add("something.txt");
-		i.remove("foo.txt");
-		i.remove("something.txt");
+		String s = b.getSha1();
+		hm.put("blob", s);
+		Tree tr = new Tree (hm);
 	}
 	
 	

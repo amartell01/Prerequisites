@@ -23,6 +23,7 @@ public class Tree {
 		String str = readHM(hm);
 		sha = encryptThisString(str);
 		file = new File ("objects/"+sha+".txt");
+		file.createNewFile();
 		pw= new PrintWriter("objects/"+sha+".txt");
 		pw.print(str);
 		pw.close();
@@ -36,7 +37,7 @@ public class Tree {
 		return str;
 	}
 	
-	 public static String encryptThisString(String input)
+	 private static String encryptThisString(String input)
 	    {
 	        try {
 	            // getInstance() method is called with algorithm SHA-1
