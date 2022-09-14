@@ -26,28 +26,33 @@ class AshersTester {
 
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
+		File f = new File ("test.txt");
+		f.delete();
 	}
 
 	@Test
-//	void testBlob() throws IOException {
-//		Blob b = new Blob ("test.txt");
-//		String str = b.getSha1();
-//		File file = new File("objects/"+str+".txt");
-//		assertTrue(file.exists());
-//	}
-//
-//	
-//	
-//	void testInit() throws IOException {	
-//		Index i = new Index();
-//		i.init();
-//	}
-	
-	void testAdd() throws IOException {
+	void testBlob() throws IOException {
+		Blob b = new Blob ("test.txt");
+		String str = b.getSha1();
+		File file = new File("objects/"+str+".txt");
+		assertTrue(file.exists());
+	}
+
+	@Test
+	void testInit() throws IOException {	
+		Index i = new Index();
+		i.init();
+	}
+	@Test
+	void testAddnRemove() throws IOException {
 		Index i = new Index();
 		i.add("foo.txt");
 		i.add("test.txt");
 		i.add("something.txt");
+		i.remove("foo.txt");
+		i.remove("something.txt");
 	}
+	
+	
 
 }
