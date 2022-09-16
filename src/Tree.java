@@ -5,8 +5,12 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigInteger;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
@@ -14,25 +18,31 @@ public class Tree {
 //	private final int numberOfBranches = 100;
 //	
 	private String sha;
-	private HashMap <String, String> hm;
-	private File file;
+	private ArrayList <String> ar;
 	private PrintWriter pw;
 	
-	public Tree (HashMap <String, String> h) throws IOException {
-		hm = h;
-		String str = readHM(hm);
+	public Tree (ArrayList <String> a) throws IOException {
+		ar = a;
+		String str = readAR(ar);
 		sha = encryptThisString(str);
-		file = new File ("objects/"+sha+".txt");
-		file.createNewFile();
-		pw= new PrintWriter("objects/"+sha+".txt");
-		pw.print(str);
+		String name = "objects/"+sha+".txt";
+		makeFile (name);
+		
+		pw= new PrintWriter(name);
+		pw.append(str);
+	
 		pw.close();
 	}
 	
-	private String readHM(HashMap <String, String> h) {
+	private void makeFile(String s) throws IOException {
+		Path newFilePath = Paths.get(s);
+	    Files.createFile(newFilePath);
+	}
+	
+	private String readAR(ArrayList <String> as) {
 		String str = "";
-		for (Entry<String, String> entry : h.entrySet()) {
-			str+=entry.getKey()+" : "+entry.getValue()+"/n";
+		for (String name: as) {
+			str+=name+"/n";
 		}
 		return str;
 	}
@@ -68,4 +78,8 @@ public class Tree {
 	            throw new RuntimeException(e);
 	        }
 	    }
+	 
+	 public String getSha() {
+		 return sha;
+	 }
 }

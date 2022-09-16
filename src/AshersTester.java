@@ -6,6 +6,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.junit.jupiter.api.AfterAll;
@@ -56,11 +57,15 @@ class AshersTester {
 	
 	@Test
 	void testTree() throws IOException {
-		HashMap <String, String> hm = new HashMap <String, String>();
+		ArrayList <String> arr = new ArrayList<String>();
 		Blob b = new Blob ("test.txt");
 		String s = b.getSha1();
-		hm.put("blob", s);
-		Tree tr = new Tree (hm);
+		arr.add("blob : "+ s);
+		
+		
+		Tree tr = new Tree (arr);
+		File file = new File("objects/"+tr.getSha()+".txt");
+		assertTrue(file.exists());
 	}
 	
 	
