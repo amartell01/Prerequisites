@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Calendar;
 import java.util.Objects;
 
 public class Commit {
@@ -21,11 +22,21 @@ public class Commit {
 		summary  = two;
 		author = three;
 		parentCommit = parent;
+		if (parentCommit!=null) {
+		parentCommit.setNext(this);
+		}
 		 File objects = new File ("objects");
 	        if (objects.exists()==false) {
 	        	objects.mkdir();
 	        }
-	        
+	        Calendar today = Calendar.getInstance();
+	        today.set(Calendar.HOUR_OF_DAY, 0); // same for minutes and seconds
+	        date = today.getTime().toString();
+	}
+	public void setNext(Commit next) {
+		
+		nextCommit = next;
+		
 	}
 	public String generateSha1String(){
 		String contents = getContents();
@@ -58,37 +69,43 @@ public class Commit {
             throw new RuntimeException(e);
         }
 	}
-	public String pTree() {
-		return pTree.toString();
-	}
+	
 	
 	public String getDate() {
 		return date;
 	}
 	public String getContents() {
 		String contents = new String ("");
+		contents = contents+summary+ "\n";
+		contents = contents+date+ "\n";
+		contents = contents + author+ "\n";
+		if (parentCommit ==null) {
+
+		} else{
+			contents=contents+ "objects/" + parentCommit.generateSha1String() ;
+		}
+		return contents;
+	}
+	public void writeFile() throws IOException {
+		String contents = new String ("");
 		contents = contents+"objects/"+pTree.getFileName() + "\n";
 		if (parentCommit ==null) {
 			contents=contents+ "\n";
 		} else{
-			contents=contents+ "objects/" + parentCommit.generateSha1String() + ".txt\n";
+			contents=contents+ "objects/" + parentCommit.generateSha1String() + "\n";
 		}
 		if (nextCommit ==null) {
 			contents=contents+ "\n";
 		} else{
-			contents=contents+"objects/"+nextCommit.generateSha1String() + ".txt\n";
+			contents=contents+"objects/"+nextCommit.generateSha1String() + "\n";
 		}
 		contents=contents+author + "\n";
 		contents=contents+date + "\n";
 		contents=contents+this.summary;
-		return contents;
-	}
-	public void writeFile() throws IOException {
-		String contents = getContents();
 		String fileName = generateSha1String();
-		File commit = new File ("objects/"+fileName+".txt");
+		File commit = new File ("objects/"+fileName);
 		commit.createNewFile();
-		 Path p = Paths.get("objects/"+fileName+".txt");
+		 Path p = Paths.get("objects/"+fileName);
 	        try {
 	            Files.writeString(p, contents, StandardCharsets.ISO_8859_1);
 	        } catch (IOException e) {

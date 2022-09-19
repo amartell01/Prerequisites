@@ -47,10 +47,10 @@ public class Blob {
 		 System.out.println ("Creating new blob " + Sha1.substring(0,10) + " from content:" + contents);
 		
 	            File objects = new File ("objects");
-	            File f2=new File ("objects/"+Sha1+".txt");
+	            File f2=new File ("objects/"+Sha1);
 	            objects.mkdir();
 	            f2.createNewFile();
-	            p=new PrintWriter ("objects/"+Sha1+".txt");
+	            p=new PrintWriter ("objects/"+Sha1);
 	            p.print(contents);
 	            p.close();
 	        

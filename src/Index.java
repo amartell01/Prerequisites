@@ -24,18 +24,18 @@ public class Index {
         		file.delete();
         	}
         }
-        File myObj = new File("index.txt"); 
+        File myObj = new File("index"); 
         if (myObj.exists()) {
         myObj.delete();
         }
-        File f2=new File ("index.txt");
+        File f2=new File ("index");
         f2.createNewFile();
 
 	}
 	public void add (String filename) throws IOException {
 		Blob create = new Blob (filename);
 		blobs.put (filename, create.getSha1());
-        File file = new File("index.txt");
+        File file = new File("index");
 		 BufferedWriter bf = null;
 		  
 	        try {
@@ -74,9 +74,9 @@ public class Index {
 	}
 	public void remove (String filename) throws IOException {
 		String Sha1 = blobs.remove(filename);
-		File myObj = new File ("objects/"+Sha1+".txt");
+		File myObj = new File ("objects/"+Sha1);
 		myObj.delete();
-		File file = new File("index.txt");
+		File file = new File("index");
 		 BufferedWriter bf = null;
 		  
 	        try {
