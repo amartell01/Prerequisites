@@ -25,7 +25,9 @@ public class Index {
         	}
         }
         File myObj = new File("index.txt"); 
+        if (myObj.exists()) {
         myObj.delete();
+        }
         File f2=new File ("index.txt");
         f2.createNewFile();
 
